@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+}
+
+.container {
+    background-color: #171717;
+    color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 50px auto;
+    max-width: 600px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.escondido{
+    background-color: #171717;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.livro{
+    color: #fff;
+    font-style: italic;
+    text-align: left;
+    align-items: center;
+    max-width: 100%;
+    margin: auto ;
+}
+
+h1 {
+    color: #fff;
+}
+
+img {
+    width: 300px;
+    margin-top: 20px;
+}
+.tela-rolavel {
+    max-height: 400px; /* Defina a altura máxima desejada */
+    overflow-y: scroll; /* Adicione uma barra de rolagem vertical quando necessário */
+    border: 1px solid #ccc; /* Uma borda opcional para destacar a área rolável */
+    padding: 10px; /* Espaçamento interno opcional */
+    display: flex; /* Centralize o conteúdo verticalmente */
+    flex-direction: column; /* Coloque os elementos verticalmente na div */
+    align-items: center; /* Centralize o conteúdo horizontalmente */
+}
+
+.btn {
+    background-color: red; /* Cor de fundo vermelha */
+    color: white; /* Cor do texto branco */
+    padding: 10px 20px; /* Espaçamento interno do botão */
+    border: none; /* Remova a borda do botão */
+    cursor: pointer; /* Transforme o cursor em uma mão ao passar sobre o botão */
+    margin-top: 10px; /* Espaçamento superior para separar o botão do conteúdo */
+    border-radius: 10px; /* Bordas redondas com um raio de 10px */
+}
+

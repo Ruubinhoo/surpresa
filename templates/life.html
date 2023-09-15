@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Pedido de Casamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Capítulo 9: Perfect Life</h1>
+        <p>Uffaaa chegamos ao final... rsrs agora é tudo ou nada... rsrs aguarde a música finalizar para você ter acesso as dicas e a chave...</p>
+        <h4>True Colours - Tom Odell</h4>
+        <img src="{{ url_for('static', filename='images/decima.png') }}" alt="Anel de Noivado">
+        <br>
+        <p class="livro">Um novo dia em tons cinzas inicia-se  <br>
+            um cinza que preenche a extensão da minha visão <br>
+            visão que busca incansavelmente um tom vibrante <br>
+            incansável busca que mistura com um silêncio inexplicável
+            <br> <br>
+            Os dias se passam e a fluidez da vida continua <br>
+            as semanas se passam e me vejo adentrar em uma areia movediça <br>
+            tal sensação que congela o meu ser juntamente com minhas emoções <br>
+            congelamento que intensifica os tons cinzas
+            <br> <br>
+            Ao entardecer vejo um por de sol perfeito e maravilhoso <br>
+            perfeição que se funde com uma linda canção (Dark four door) <br>
+            momento que transcende a visão e a compreensão da matéria <br>
+            momento que arrepia o meu corpo e aquece a minha alma
+            <br> <br>
+            transcendência de uma canção que alcança uma outra linda alma <br>
+            causando uma conexão inexplicável <br>
+            conexão que nos aquece com uma vasta felicidade <br>
+            um sentimento que derrete todas as barreiras invisíveis
+            <br> <br>
+            Finaliza-se um dia comum com um toque especial, através de algo mágico e encantador <br>
+            encantamento que vem da sua linda face acompanhada do seu sorriso perfeito <br>
+            sorriso que colore todos os tons tons cinza da minha visão <br>
+            essa visão colorida que tenho toda vez que a vejo minha doce e amada Jéssica.
+            </p><br>
+            <!-- <button id="startButton" class="btn">Aperte para Iniciar</button> -->
+            <p id="timer" class="btn">Tempo restante: <span id="countdown">15:00</span></p><br>
+            <a href="colors" class="btn btn-primary">Página Anterior</a><br><br>
+            <script>
+                var timerInterval;
+                var startTime;
+                var isRunning = false; // Verifica se o temporizador está em execução
+        
+                // Função para iniciar o temporizador
+                function iniciarTemporizador() {
+                    if (!isRunning) {
+                        // Verifica se há uma hora de início no armazenamento local
+                        startTime = localStorage.getItem('startTime');
+        
+                        if (!startTime) {
+                            // Se não houver, define a hora de início atual
+                            startTime = new Date().getTime();
+                            localStorage.setItem('startTime', startTime);
+                        }
+        
+                        // Iniciar o cronômetro
+                        var timeLeft = Math.max(0, 15 * 60 - Math.floor((new Date().getTime() - startTime) / 1000));
+                        var countdown = document.getElementById("countdown");
+        
+                        timerInterval = setInterval(function () {
+                            var minutes = Math.floor(timeLeft / 60);
+                            var seconds = timeLeft % 60;
+        
+                            countdown.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        
+                            if (timeLeft === 0) {
+                                clearInterval(timerInterval);
+                                localStorage.removeItem('startTime'); // Limpa a hora de início
+                                window.location.href = "final";
+                            } else {
+                                timeLeft--;
+                            }
+                        }, 1000); // Atualiza a cada segundo
+        
+                        isRunning = true;
+                    }
+                }
+        
+                // Iniciar o temporizador automaticamente quando a página for carregada
+                window.onload = iniciarTemporizador;
+        
+                // Limpar a hora de início no localStorage quando a página for atualizada
+                window.addEventListener('beforeunload', function () {
+                    localStorage.removeItem('startTime');
+                });
+            </script>
+    </div>
+    <audio controls autoplay loop>
+        <source src="{{ url_for('static', filename='audio/True Colour.mp3') }}" type="audio/mpeg">
+        Seu navegador não suporta a tag de áudio.
+    </audio>
+
+</body>
+</html>

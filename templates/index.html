@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Pedido de Casamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Seja Bem Vinda, Jéssica</h1>
+        <p>A essa grande aventura que te acompanhará em sua jornada até o seu destino</p>
+        <img src="{{ url_for('static', filename='images/primeira.png') }}" alt="Anel de Noivado">
+        <br><br>
+        <a id="meuBotao" disabled href="{{ url_for('introducao') }}" class="btn">Pronta para começar?</a>
+        <script>
+            document.getElementById("meuBotao").addEventListener("click", function () {
+                // Iniciar temporizador de 15 minutos (900000 ms)
+                setTimeout(function () {
+                    window.location.href = "introducao";
+                }, 0.5); // 15 minutos em milissegundos
+            });
+        </script>
+        {% if bloqueado %}
+        <p>Tempo restante: <span id="tempoRestante">15:00</span></p>
+        {% endif %}
+    </div>
+
+</body>
+</html>

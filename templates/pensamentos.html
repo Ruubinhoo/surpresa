@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Pedido de Casamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Capítulo 7: Pensamentos</h1>
+        <p>Estamos quase lá... Espero que a companhia esteja boa.... rsrs 
+        <h4>A beautiful life - Christopher</h4>
+        </p>
+        <img src="{{ url_for('static', filename='images/oitava.png') }}" alt="Anel de Noivado">
+        <br>
+        <p class="livro">As vezes me pego pensando em você<br>
+            pensamentos que me preenchem com um lindo sentimento<br>
+            sentimento que me faz sentir algo inexplicável<br>
+            inexplicável que só consigo controlar quando encontro uma forma de senti-la
+            <br><br>
+            Como sentir essa doce mulher através do possível <br>
+            o possível é algo complexo, pois nem sempre temos a clareza do possível <br>
+            possível que encontrei em sua voz e em suas palavras <br>
+            possível que descobri em escrever para você quando não a tenho
+            <br><br>
+            A única palavra possível que traduz meus sentimentos é "saudades"<br>
+            saudade que reduz quando lhe escrevo, quando lhe ouço, quando te vejo<br>
+            reduzir é suficiente para saciar, difícil de responder, quando não é algo racional;<br>
+            será que o racional nos possibilita a entender tudo que sentimos.
+            <br><br>
+            Minha querida Jéssica as vezes palavras não conseguem traduzir tudo que sentimos<br>
+            o sentimento que mais permeia pelo meu ser e não sei com saciar é a falta que você faz na minha vida<br>
+            tal sensação da sua falta se dissolve no seu caloroso e aconchegante abraço<br>
+            abraço que me traz a certeza que meu sentimento por você é como o vento, não posso a ver, más posso sentir.</p> <br>
+            <button id="startButton" class="btn">Aperte para Iniciar</button>
+            <p id="timer" class="btn">Tempo restante: <span id="countdown">15:00</span></p>
+            <br>
+            <a href="conhecimento" class="btn btn-primary">Página Anterior</a><br><br>
+            <script>
+                var timerInterval;
+                var startTime;
+                var isRunning = false; // Verifica se o temporizador está em execução
+        
+                // Função para iniciar o temporizador
+                function iniciarTemporizador() {
+                    if (!isRunning) {
+                        // Verifica se há uma hora de início no armazenamento local
+                        startTime = localStorage.getItem('startTime');
+        
+                        if (!startTime) {
+                            // Se não houver, define a hora de início atual
+                            startTime = new Date().getTime();
+                            localStorage.setItem('startTime', startTime);
+                        }
+        
+                        // Iniciar o cronômetro
+                        var timeLeft = Math.max(0, 15 * 60 - Math.floor((new Date().getTime() - startTime) / 1000));
+                        var countdown = document.getElementById("countdown");
+        
+                        timerInterval = setInterval(function () {
+                            var minutes = Math.floor(timeLeft / 60);
+                            var seconds = timeLeft % 60;
+        
+                            countdown.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        
+                            if (timeLeft === 0) {
+                                clearInterval(timerInterval);
+                                localStorage.removeItem('startTime'); // Limpa a hora de início
+                                window.location.href = "colors";
+                            } else {
+                                timeLeft--;
+                            }
+                        }, 1000); // Atualiza a cada segundo
+        
+                        isRunning = true;
+                    }
+                }
+        
+                // Iniciar o temporizador automaticamente quando a página for carregada
+                window.onload = iniciarTemporizador;
+        
+                // Limpar a hora de início no localStorage quando a página for atualizada
+                window.addEventListener('beforeunload', function () {
+                    localStorage.removeItem('startTime');
+                });
+            </script>
+    </div>
+    <audio controls autoplay loop>
+        <source src="{{ url_for('static', filename='audio/A Beautiful Life.mp3') }}" type="audio/mpeg">
+        Seu navegador não suporta a tag de áudio.
+    </audio>
+
+</body>
+</html>

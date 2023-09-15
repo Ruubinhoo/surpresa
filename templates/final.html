@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Pedido de Casamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Capítulo Final:</h1>
+        <p class="livro">Digite o código após ler as dicas abaixo: <br>
+            <b>°Primeiro dígito:</b> encontre um número nos capítulos anteriores e clique nele;
+            <br>
+            <b>°Segundo dígito:</b> O mês do nosso encantador almoço que revelou o sentimento;
+            <br>
+            <b>°Terceiro dígito:</b> A posição numérica no alfabeto da primeira letra do meu nome;
+            <br>
+            <b>°Quarto dígito:</b> Último número do ano que descobrimos nosso mágico sentimento - Connection Souls
+            </p>
+            <h4>I'll never love again - Lay Gaga</h4>
+        <img src="{{ url_for('static', filename='images/onze.png') }}" alt="Anel de Noivado">
+        <br>
+        <p class="livro">Parabéns minha doce e eterna amada Jéssica, você chegou ao fim da nossa aventura, espero que eu tenha sido uma boa companhia rsrs Agora é só você abrir seu presente e sentir a forma que eu estarei sempre contigo...</p>
+        <form method="post" action="/pagina_final">
+            <label for="senhaa">Digite a senha:</label>
+            <input type="password" id="senhaa" name="senhaa" required>
+            <button type="submit" class="btn">Desbloquear</button>
+            <p id="timer">Tempo restante: <span id="countdown">60:00</span></p><br>
+            <a href="life" class="btn btn-primary">Página Anterior</a><br><br>
+            <script>
+                var timerInterval;
+                var startTime;
+                var isRunning = false; // Verifica se o temporizador está em execução
+        
+                // Função para iniciar o temporizador
+                function iniciarTemporizador() {
+                    if (!isRunning) {
+                        // Verifica se há uma hora de início no armazenamento local
+                        startTime = localStorage.getItem('startTime');
+        
+                        if (!startTime) {
+                            // Se não houver, define a hora de início atual
+                            startTime = new Date().getTime();
+                            localStorage.setItem('startTime', startTime);
+                        }
+        
+                        // Iniciar o cronômetro
+                        var timeLeft = Math.max(0, 60 * 60 - Math.floor((new Date().getTime() - startTime) / 1000));
+                        var countdown = document.getElementById("countdown");
+        
+                        timerInterval = setInterval(function () {
+                            var minutes = Math.floor(timeLeft / 60);
+                            var seconds = timeLeft % 60;
+        
+                            countdown.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        
+                            if (timeLeft === 0) {
+                                clearInterval(timerInterval);
+                                localStorage.removeItem('startTime'); // Limpa a hora de início
+                                window.location.href = "pagina_seguinte.html";
+                            } else {
+                                timeLeft--;
+                            }
+                        }, 1000); // Atualiza a cada segundo
+        
+                        isRunning = true;
+                    }
+                }
+        
+                // Iniciar o temporizador automaticamente quando a página for carregada
+                window.onload = iniciarTemporizador;
+            </script>
+        </form>
+        {% if mensagem %}
+        <p>{{ mensagem }}</p>
+        {% endif %}
+    </div>
+    <audio controls autoplay loop>
+        <source src="{{ url_for('static', filename='audio/Ill Never Love Again.mp3') }}" type="audio/mpeg">
+        Seu navegador não suporta a tag de áudio.
+    </audio>
+
+</body>
+</html>

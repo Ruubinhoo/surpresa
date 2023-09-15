@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Pedido de Casamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <a href="pessoa" class="escondido"><h1>Capítulo 3: Tempo</h1></a>
+        <p>E aí avançamos mais um pouquinho, está gostando na nossa aventura... Hummm imagino que sim rsrs </p>
+        <h4>Hollow Coves - Coastine</h4>
+        <img src="{{ url_for('static', filename='images/quarta.png') }}" alt="Anel de Noivado">
+        <br>
+        <p class="livro">Cada dia que passa fomenta o meu ser;<br>
+            uma procura incansável do encontro perfeito;<br>
+            um encontro pelo natural acaso;<br>
+            um acaso que se fundi a uma companhia perfeita.
+            <br><br>
+            O tempo ao seu lado tem outro significado;<br>
+            segundos transforma-se em minutos;<br>
+            minutos se transforma em horas;<br>
+            horas se transforma em dias.
+            <br><br>
+            Esse mistério do tempo energisa a alma;<br>
+            energia que tornam os dias mais fáceis;<br>
+            energia que dissolve a complexidade;<br>
+            e tudo fica mais vivido e colorido.
+            <br><br>
+            Cores verdadeiras que aquece o meu ser;<br>
+            aconchego que aquece o corpo e a alma;<br>
+            faz minha mente e espírito almejar que;<br>
+            esse calor e felicidade seja eterno 
+            </p> <br>
+            <p id="timer" class="btn">Tempo restante: <span id="countdown">15:00</span></p><br>
+            <a href="complexidade" class="btn btn-primary">Página Anterior</a><br><br>
+            <script>
+                var timerInterval;
+                var startTime;
+                var isRunning = false; // Verifica se o temporizador está em execução
+        
+                // Função para iniciar o temporizador
+                function iniciarTemporizador() {
+                    if (!isRunning) {
+                        // Verifica se há uma hora de início no armazenamento local
+                        startTime = localStorage.getItem('startTime');
+        
+                        if (!startTime) {
+                            // Se não houver, define a hora de início atual
+                            startTime = new Date().getTime();
+                            localStorage.setItem('startTime', startTime);
+                        }
+        
+                        // Iniciar o cronômetro
+                        var timeLeft = Math.max(0, 15 * 60 - Math.floor((new Date().getTime() - startTime) / 1000));
+                        var countdown = document.getElementById("countdown");
+        
+                        timerInterval = setInterval(function () {
+                            var minutes = Math.floor(timeLeft / 60);
+                            var seconds = timeLeft % 60;
+        
+                            countdown.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        
+                            if (timeLeft === 0) {
+                                clearInterval(timerInterval);
+                                localStorage.removeItem('startTime'); // Limpa a hora de início
+                                window.location.href = "pessoa";
+                            } else {
+                                timeLeft--;
+                            }
+                        }, 1000); // Atualiza a cada segundo
+        
+                        isRunning = true;
+                    }
+                }
+        
+                // Iniciar o temporizador automaticamente quando a página for carregada
+                window.onload = iniciarTemporizador;
+        
+                // Limpar a hora de início no localStorage quando a página for atualizada
+                window.addEventListener('beforeunload', function () {
+                    localStorage.removeItem('startTime');
+                });
+            </script>
+    </div>
+    <audio controls autoplay loop>
+        <source src="{{ url_for('static', filename='audio/Hollow Coves.mp3') }}" type="audio/mpeg">
+        Seu navegador não suporta a tag de áudio.
+    </audio>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Pedido de Casamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Capítulo 2: Complexidade</h1>
+        <p>E aí como está a ansiedade... Imagino que você já esteja voando a essas horas e cada minuto que passa te traz vários pensamentos muito bons... </p>
+        <h4>The reason - Hoobastank</h4>
+        <img src="{{ url_for('static', filename='images/terceira.png') }}" alt="Anel de Noivado">
+        <br>
+        <p class="livro">Um eterno silêncio
+            que persuadia minha mente
+            foi preenchido pela música da sua doce voz
+            <br><br>
+            Sentimentos inexplicáveis
+            conversam com a música 
+            que preenche nossas almas
+            minha querida e doce Jéssica
+            <br><br>
+            Olho para o seu estrelado e isso me acalma
+            pois sinto que a complexidade do universo 
+            me aproxima de você e do seu lindo sorriso 
+            essa calmaria me traz uma paz interior
+            <br><br>
+            Saudade que transborda pelo meu ser
+            aprendendo através da música 
+            aprendendo através das suas palavras 
+            combatê-la com lindas lembranças 
+            <br><br>
+            O tempo irá passar e aprenderemos com ele 
+            a viver nessa complexidade de emoções 
+            a certeza que tenho é que algo verdadeiro 
+            sempre estará comigo para todo o sempre  </p><br>
+            <!-- <button id="startButton" class="btn">Aperte para Iniciar</button> -->
+            <p id="timer" class="btn">Tempo restante: <span id="countdown">15:00</span></p><br>
+            <a href="introducao" class="btn btn-primary">Página Anterior</a><br><br>
+            <script>
+                var timerInterval;
+                var startTime;
+                var isRunning = false; // Verifica se o temporizador está em execução
+        
+                // Função para iniciar o temporizador
+                function iniciarTemporizador() {
+                    if (!isRunning) {
+                        // Verifica se há uma hora de início no armazenamento local
+                        startTime = localStorage.getItem('startTime');
+        
+                        if (!startTime) {
+                            // Se não houver, define a hora de início atual
+                            startTime = new Date().getTime();
+                            localStorage.setItem('startTime', startTime);
+                        }
+        
+                        // Iniciar o cronômetro
+                        var timeLeft = Math.max(0, 15 * 60 - Math.floor((new Date().getTime() - startTime) / 1000));
+                        var countdown = document.getElementById("countdown");
+        
+                        timerInterval = setInterval(function () {
+                            var minutes = Math.floor(timeLeft / 60);
+                            var seconds = timeLeft % 60;
+        
+                            countdown.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        
+                            if (timeLeft === 0) {
+                                clearInterval(timerInterval);
+                                localStorage.removeItem('startTime'); // Limpa a hora de início
+                                window.location.href = "tempo";
+                            } else {
+                                timeLeft--;
+                            }
+                        }, 1000); // Atualiza a cada segundo
+        
+                        isRunning = true;
+                    }
+                }
+        
+                // Iniciar o temporizador automaticamente quando a página for carregada
+                window.onload = iniciarTemporizador;
+        
+                // Limpar a hora de início no localStorage quando a página for atualizada
+                window.addEventListener('beforeunload', function () {
+                    localStorage.removeItem('startTime');
+                });
+            </script>
+    </div>
+    <audio controls autoplay loop>
+        <source src="{{ url_for('static', filename='audio/The reason.mp3') }}" type="audio/mpeg">
+        Seu navegador não suporta a tag de áudio.
+    </audio>
+</body>
+</html>

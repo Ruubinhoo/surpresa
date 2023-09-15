@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Pedido de Casamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <a href="complexidade" class="escondido"><h1>Capítulo 1: Introdução</h1></a>
+        <p>Imagino que nesse momento você esteja com um friozinho na barriga, começando sua jornada a sua evolução pessoal, portanto vou te fazer companhia nesses 9 capítulos. Estamos juntos.</p>
+        <h4>Don't Stop Believin - Teddy Swims</h4>
+        <img src="{{ url_for('static', filename='images/segunda.png') }}" alt="Anel de Noivado">
+        <p class="livro">Minha doce Jéssica agora você embarcou juntamente comigo em uma aventura sem volta rsrs onde seremos só nos dois por essas próximas horas, você irá receber dicas de como ter a senha para a sua recompensa. </p><br>
+        <!-- <button id="startButton" class="btn">Próximo Capitulo</button> -->
+            <p id="timer" class="btn">Tempo restante: <span id="countdown">15:00</span></p><br>
+            <a href="index" class="btn btn-primary">Página Anterior</a><br><br>
+            <script>
+                var timerInterval;
+                var startTime;
+                var isRunning = false; // Verifica se o temporizador está em execução
+        
+                // Função para iniciar o temporizador
+                function iniciarTemporizador() {
+                    if (!isRunning) {
+                        // Verifica se há uma hora de início no armazenamento local
+                        startTime = localStorage.getItem('startTime');
+        
+                        if (!startTime) {
+                            // Se não houver, define a hora de início atual
+                            startTime = new Date().getTime();
+                            localStorage.setItem('startTime', startTime);
+                        }
+        
+                        // Iniciar o cronômetro
+                        var timeLeft = Math.max(0, 15 * 60 - Math.floor((new Date().getTime() - startTime) / 1000));
+                        var countdown = document.getElementById("countdown");
+        
+                        timerInterval = setInterval(function () {
+                            var minutes = Math.floor(timeLeft / 60);
+                            var seconds = timeLeft % 60;
+        
+                            countdown.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        
+                            if (timeLeft === 0) {
+                                clearInterval(timerInterval);
+                                localStorage.removeItem('startTime'); // Limpa a hora de início
+                                window.location.href = "complexidade";
+                            } else {
+                                timeLeft--;
+                            }
+                        }, 1000); // Atualiza a cada segundo
+        
+                        isRunning = true;
+                    }
+                }
+        
+                // Iniciar o temporizador automaticamente quando a página for carregada
+                window.onload = iniciarTemporizador;
+        
+                // Limpar a hora de início no localStorage quando a página for atualizada
+                window.addEventListener('beforeunload', function () {
+                    localStorage.removeItem('startTime');
+                });
+            </script>
+    </div>
+    <audio controls autoplay loop>
+        <source src="{{ url_for('static', filename='audio/Dont Stop Believin.mp3') }}" type="audio/mpeg">
+        Seu navegador não suporta a tag de áudio.
+    </audio>
+
+</body>
+</html>
