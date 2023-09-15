@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 
+import os
+
 app = Flask(__name__)
 
 @app.route('/index')
@@ -59,6 +61,7 @@ def pagina_final():
     return render_template('pagina_final.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # port = str(os.getenv('PORT'),'8080')
+    app.run(host='0.0.0.0', port=8080,debug=True)
 
     # host='0.0.0.0', port=8080, 

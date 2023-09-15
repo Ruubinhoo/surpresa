@@ -57,5 +57,6 @@ img {
     cursor: pointer; /* Transforme o cursor em uma mão ao passar sobre o botão */
     margin-top: 10px; /* Espaçamento superior para separar o botão do conteúdo */
     border-radius: 10px; /* Bordas redondas com um raio de 10px */
+    text-decoration: none;
 }
 

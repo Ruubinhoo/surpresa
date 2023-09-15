@@ -16,13 +16,14 @@
             <b>°Terceiro dígito:</b> A posição numérica no alfabeto da primeira letra do meu nome;
             <br>
             <b>°Quarto dígito:</b> Último número do ano que descobrimos nosso mágico sentimento - Connection Souls
+            <br><b>Dica:</b> Aperte no nome do Capítulo para avançar de página! 
             </p>
-            <h4>I'll never love again - Lay Gaga</h4>
+            <h4>I'll never love again - Lady Gaga</h4>
         <img src="{{ url_for('static', filename='images/onze.png') }}" alt="Anel de Noivado">
         <br>
         <p class="livro">Parabéns minha doce e eterna amada Jéssica, você chegou ao fim da nossa aventura, espero que eu tenha sido uma boa companhia rsrs Agora é só você abrir seu presente e sentir a forma que eu estarei sempre contigo...</p>
-        <form method="post" action="/pagina_final">
-            <label for="senhaa">Digite a senha:</label>
+        <form method="post" action="/pagina_final"><br>
+            <label for="senhaa">Digite a senha: <br></label>
             <input type="password" id="senhaa" name="senhaa" required>
             <button type="submit" class="btn">Desbloquear</button>
             <p id="timer">Tempo restante: <span id="countdown">60:00</span></p><br>
@@ -76,7 +77,7 @@
         {% endif %}
     </div>
     <audio controls autoplay loop>
-        <source src="{{ url_for('static', filename='audio/Ill Never Love Again.mp3') }}" type="audio/mpeg">
+        <source src="{{ url_for('static', filename='audio/True Colour.mp3') }}" type="audio/mpeg">
         Seu navegador não suporta a tag de áudio.
     </audio>
 
