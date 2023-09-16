@@ -4,9 +4,9 @@ import os
 
 app = Flask(__name__)
 
-@app.route('/index')
+@app.route('/surpresa')
 def index():
-    return render_template('index.html')
+    return render_template('surpresa.html')
 
 @app.route('/introducao')
 def introducao():
